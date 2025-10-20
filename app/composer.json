@@ -23,6 +23,7 @@
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "guzzlehttp/guzzle": "*",
     "phayes/geophp": "^1.2",
+    "vlucas/phpdotenv": "^4.0",
     "ext-simplexml": "*",
     "ext-json": "*",
     "ext-mbstring": "*"
