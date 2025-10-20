@@ -1,3 +1,4 @@
 .idea/
 .gigaide/
+app/vendor/
 .bin/push.sh
