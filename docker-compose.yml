@@ -1,0 +1,13 @@
+services:
+  php-cli:
+    build:
+      context: .
+      dockerfile: app/docker/Dockerfile
+    ports:
+      - "9001:9003"
+    volumes:
+      - ./app:/app/
+    tty: true
+    working_dir: /app
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1

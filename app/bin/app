@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+if (!class_exists('Yii')) {
+    require_once dirname(__DIR__) . '/vendor/yiisoft/yii2/Yii.php';
+}
+
+use yii\console\Application;
+
+$application = new Application([
+    'id' => 'console',
+    'basePath' => dirname(__DIR__),
+    'controllerNamespace' => 'app\controllers',
+]);
+
+$exitCode = $application->run();
+exit($exitCode);
