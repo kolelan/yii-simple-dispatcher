@@ -12,14 +12,24 @@
 ```
 /app/
 ├── bin/
-│   └── app.php         # Точка входа (исполняемый файл)
-├── vendor/             # Зависимости через Composer
-├── app/
-│   └── controllers/
-│       └── HelloController.php  # Пример контроллера
-├── composer.json       # Конфигурация Composer
-├── docker-compose.yml  # Конфигурация Docker
-└── .env                # (опционально) переменные окружения
+│   └── app.php                  # Точка входа (исполняемый файл)
+├── vendor/                      # Зависимости через Composer
+├── src/
+│   ├── controllers/
+│   │    └── HelloController.php # Пример контроллера
+│   ├── components/
+│   │   └── EventDispatcher.php
+│   ├── events/
+│   │   ├── EventInterface.php
+│   │   └── ExampleEvent.php
+│   ├── handlers/
+│   │   └── ExampleEventHandler.php
+│   ├── models/
+│   │   └── Event.php
+│   └── .env                     # Переменные окружения только для контейнера php-cli
+├── composer.json                # Конфигурация Composer
+├── docker-compose.yml           # Конфигурация Docker
+└── .env                         # (опционально) переменные окружения
 ```
 
 ## 🚀 Как запустить
