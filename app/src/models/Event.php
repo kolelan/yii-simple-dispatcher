@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\events\EventInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -17,16 +18,23 @@ use yii\db\ActiveRecord;
  * @property \DateTime $created_at
  * @property \DateTime $updated_at
  */
-class Event extends ActiveRecord
+class Event extends ActiveRecord implements EventInterface
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'events';
+        return '{{%events}}';
     }
 
+    /**
+     * @return string
+     */
+    public function getName():string
+    {
+        return $this->name;
+    }
     /**
      * {@inheritdoc}
      */
@@ -35,7 +43,7 @@ class Event extends ActiveRecord
         return [
             [['name', 'group_name'], 'required'],
             [['payload', 'data'], 'safe'],
-            [['success'], 'boolean'],
+            [['success','pending'], 'boolean'],
             [['counter'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
         ];
@@ -52,6 +60,7 @@ class Event extends ActiveRecord
             'group_name' => 'Group Name',
             'payload' => 'Payload',
             'success' => 'Success',
+            'pending' => 'Pending',
             'counter' => 'Counter',
             'data' => 'Data',
             'created_at' => 'Created At',
