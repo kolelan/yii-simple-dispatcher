@@ -22,10 +22,18 @@ RUN apt-get update && \
 # Установка PHP расширений
 RUN docker-php-ext-install -j$(nproc) gd mbstring xml zip exif pcntl pdo pdo_pgsql
 
+# Установка драйвера Redis
+RUN pecl install redis && \
+    docker-php-ext-enable redis
+
+
 # Копирование Composer из образа composer:2
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # Добавление пользователя и установка прав
 RUN useradd -ms /bin/bash appuser
 WORKDIR /app
+
+CMD ["tail", "-f", "/dev/null"]
+
 USER appuser

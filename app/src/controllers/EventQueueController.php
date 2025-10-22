@@ -9,9 +9,9 @@ use Faker\Factory as FakerFactory;
 use yii\console\ExitCode;
 
 /**
- * Пример контроллера для консольных приложений для генерации событий
+ * Пример контроллера для консольных приложений с отправкой событий в очередь
  */
-class EventGenerateController extends Controller
+class EventQueueController extends Controller
 {
 
     /**
@@ -19,6 +19,9 @@ class EventGenerateController extends Controller
      */
     public function actionIndex(string $name, int $number)
     {
+        /** @var $dispatcher \app\components\EventDispatcher Диспетчер событий */
+        $dispatcher = \Yii::$app->get('eventDispatcher');
+
         $factory = FakerFactory::create('ru_RU');
 
         foreach (range(1, $number) as $i) {
@@ -40,11 +43,11 @@ class EventGenerateController extends Controller
             $event->name = $name;
             $event->group_name = "Group {$name}";
             $event->payload = $payload;
-//            $event->payload = json_encode($payload, JSON_UNESCAPED_UNICODE); # если postgres не поддерживает jsonb
             $event->data = $data;
             $event->success = false;
             $event->save();
-            $this->stdout("{$i} Событие {$name} сгенерировано!\n");
+            $dispatcher->pushToQueue($event);
+            $this->stdout("{$i} Событие {$name} {$event->id} сгенерировано и отправлено в очередь".PHP_EOL);
         }
         return ExitCode::OK;
 

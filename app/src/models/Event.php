@@ -13,8 +13,9 @@ use yii\db\ActiveRecord;
  * @property string $group_name
  * @property array|mixed $payload
  * @property bool $success
+ * @property bool $pending
  * @property int $counter
- * @property array|mixed $data
+ * @property array|mixed $data.ююю
  * @property \DateTime $created_at
  * @property \DateTime $updated_at
  */
