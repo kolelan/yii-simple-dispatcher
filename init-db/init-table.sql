@@ -3,10 +3,11 @@ CREATE TABLE events (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     group_name VARCHAR(255) NOT NULL,
-    payload JSONB,
+    payload JSON,
     success BOOLEAN NOT NULL DEFAULT true,
+    pending BOOLEAN NOT NULL DEFAULT true,
     counter INTEGER NOT NULL DEFAULT 1,
-    data JSONB,
+    data JSON,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

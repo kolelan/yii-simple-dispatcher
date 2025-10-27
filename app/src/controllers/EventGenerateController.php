@@ -7,6 +7,7 @@ use yii\console\Controller;
 use app\models\Event;
 use Faker\Factory as FakerFactory;
 use yii\console\ExitCode;
+use yii\helpers\VarDumper;
 
 /**
  * Пример контроллера для консольных приложений для генерации событий
@@ -43,11 +44,21 @@ class EventGenerateController extends Controller
 //            $event->payload = json_encode($payload, JSON_UNESCAPED_UNICODE); # если postgres не поддерживает jsonb
             $event->data = $data;
             $event->success = false;
-            $event->save();
+            $save = $event->save();
+            var_dump($save);
             $this->stdout("{$i} Событие {$name} сгенерировано!\n");
         }
         return ExitCode::OK;
-
     }
 
+    public function actionTest()
+    {
+        echo "test",PHP_EOL;
+
+        $sql = "SELECT * from kls.kls LIMIT 10";
+        $eres = Yii::$app->edb->createCommand($sql)->queryAll();
+        VarDumper::dump($eres);
+        $ires = Yii::$app->idb->createCommand($sql)->queryAll();
+        var_dump($ires);
+    }
 }

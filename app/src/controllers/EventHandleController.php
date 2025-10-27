@@ -31,6 +31,7 @@ class EventHandleController extends Controller
         $this->dispatcher->subscribe(ExampleEventHandler::EVENT_NAME, [new ExampleEventHandler(), 'handle']);
         // Получаем событие из БД
         $event = Event::findOne(['name'=>ExampleEventHandler::EVENT_NAME,'success' => false]);
+        var_dump($event);
         if (!$event) {
             echo "Событие не найдено.\n";
             return ExitCode::OK;

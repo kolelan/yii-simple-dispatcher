@@ -36,7 +36,7 @@ class m251021_072414_create_events_table extends Migration
         $this->createIndex('idx_events_group_name', 'events', ['group_name', 'name']);
         $this->createIndex('idx_events_pending_success', 'events', ['pending', 'success']);
 
-        // GIN-индексы для JSONB полей
+        // GIN-индексы для JSON полей (в PostgreSQL 9.6 для JSON также работает GIN)
         $this->execute("CREATE INDEX idx_events_payload_gin ON events USING GIN (payload)");
         $this->execute("CREATE INDEX idx_events_data_gin ON events USING GIN (data)");
     }
